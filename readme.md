@@ -93,7 +93,7 @@ The function stats with `$products`, which contains the full list and then uses 
 
    - See: https://svelte.dev/tutorial/text-inputs
 
-   - This code may help - try it in your browser console
+   - This code example will help - try it in your browser console
 
      ```javascript
          // array
