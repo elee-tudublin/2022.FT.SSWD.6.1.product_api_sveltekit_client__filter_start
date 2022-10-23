@@ -1,4 +1,4 @@
-# Web API Client: Part 1 - display categories and products
+# Web API Client: Part 2 - filtering products
 
 Enda Lee 2022
 
@@ -9,14 +9,13 @@ Enda Lee 2022
 3. Open in VS Code (separate to the server API instance).
 4. In a terminal run `npm install`.
 5. Start the application using `npm run dev`.
+6. Open the client site: http://localhost:5173
 
 
 
 ## Introduction
 
-This tutorial will use SvelteKit to create a client website which will uses the JavaScript Fetch API to request and display data from the web API created previously. Please note that port numbers used later are different to the one onnes shown in the diagram.
-
-![Application overview - client and server](./media/app_overview.png)
+In part 1, clicking a category called the API to the get products by category id, e.g. **``localhost:5001/product/bycat/2``**. This method works well but requires a server call for each 'filter' request. This lab will look at an alternative where filtering is carried out on the client side.
 
 
 
@@ -24,184 +23,92 @@ This tutorial will use SvelteKit to create a client website which will uses the 
 
 The application will use **separate** **`client`** and **`server`** applications which should be opened in separate VS Code instances when working on this lab.
 
-##### Server-side
-
-The client functionality is dependent on a server API with Category and Product endpoints. Make sure that the server API is running and listening on http://localhost:5001
-
-
-
-
-
-![client and server apps](./media/app_overview2.png)
-
-The client site/ application will fetch its data from the server-side API running on http://localhost:5001
-
-
-
-## 2. Site structure
-
-#### 2.1. Site root
-
-When http://localhost:5173 loads first, the empty default page looks like the following. 
-
-![start - empty page](./media/empty_page.png)
-
-
-
-This page will act as a template for displaying category and product details. It is served from **`srd/routes/+page.svelte`**
-
-After the products are retrieved, they will be displayed in the `HTML table`. The table body, which has `id="productRows"` will be populated using `JavaScript`. The product data will be requested from the API.
-
-![image-20220303140317719](./media/HTML_table.png)
-
-
-
-#### 2.2  Page Layout
-
-**`+layout.svelte`** defines the common layout and navigation elements shared by all of the pages in the site. The **`routes`** folder includes a number of sample pages including login, about, and services.
-
-Styling is based on **Bootstrap 5.2** which is loaded in **`app.html`**, with additional css defined in **`static\css\style.css`**.
-
-#### 2.3 .env
-Rename **`.env.example`** to **`.env`**. It defines the **`base_url`** of the server API.
-
-![env](./media/env.png)
-
-
-
-
-
-
-
-## 3. Retrieving data from the Server API
-
-In this section we will add functionality to get and store data from the API. It is assumed that the server API is running n http://localhost:5001 with endpoints to return **all categories**, **all products**, and **products by category id**
-
-#### 3.1. Add a SvelteKit store
-
-The framework includes the **store** feature to manage and persist data and session state in the application. Add a folder named **stores** to the **`src`** folder. Then add **`productStore.js`** to  **`stores`**:
-
- ![store](./media/store.png)
-
-
-
-The store script defines two writable store objects for product and category  plus the functions which will be used to fetch data from the API. Read the comments for details. 
-
-**`productStore.js`** code:
-
-```javascript
-import { writable } from 'svelte/store';
-
-
-// .env variables starting with VITE_ are accessible client and server side 
-const base_url = import.meta.env.VITE_API_BASE_URL
-
-// declare writable stores for products and categories
-export let products = writable([]);
-export let categories = writable([]);
-
-
-// Function to fetch and return data from an API
-// Full URI based on base_url + endpoint
-const getAPIData = async (endpoint = '') => {
-    try {
-        const response = await fetch(`${base_url}${endpoint}`);
-        const data = await response.json();
-        //console.log(data);
-        return data;
-
-    } catch (err) {
-        console.log('getAllProducts() error (store) ', err.message);
-    } finally {
-
-    }
-}
-
-// Function to get all products from the api
-// sets the products store
-export const getAllProducts = async () => {
-
-    const data = await getAPIData('/product');
-    products.set(data);
-}
-
-// Function to get all categories from the api
-// sets the categories store
-export const getAllCategories= async () => {
-
-    const data = await getAPIData('/category');
-    categories.set(data);     
-
-}
-
-
-// Function to get products in a category (by category id)
-// sets the products store
-export const getProductsByCat= async (cat_id = 0) => {
-
-    // 
-    if (cat_id > 0) {
-        const data = await getAPIData(`/product/bycat/${cat_id}`);
-        categories.set(data);
-    } else {
-        getAllProducts();
-    }
-
-}
-
-// Initialise the store when loaded
-await getAllProducts();
-await getAllCategories();
-
-```
-
-
-
-## 4. Displaying the data
-
-Product and Category data will be displayed in the default page, **`src\routes\+page.svelte`**, as described above.
-
-First, the stores and other dependencies must be imported into the page.
-
-![store_imports](./media/store_imports.png)
-
-
-
-#### 4.1 Display Categories
-
-The **categories store** contains everything from the the category table in the database (provided by the API). We can iterate through the list and display. each as a link in the left menu of the page.
-
-Note too the All categories link.
-
-![each_category](./media/each_category.png)
-
-
-
-When the button links are clicked (`on:click`) the `getProductsByCat()` function is called, passing the `category id` as a parameter. This allows he list of products to be filtered.
-
-Also note the **`$`** symbol before categories in line 23. This means that the page can listen for changes to the categories store and update the view.
-
-
-
-#### 4.2 Display Products
-
-This is similar to categories.  Again there is a subscription to  **`$products`** so that the page is updated whenever the store updates. You will see this when a category link is clicked.
-
-![product_table](./media/product_table.png)
-
-
-
-## Test the Application
-
-First **open and start the server API app**, so that it is running and ready for http connections. Then start the SvelteKit ap.
-
-In a web browser, open http://localhost:5173. The page should load and display the data.
-
-Check for details in the browser console where you will say the result of any logging, errors, etc.
+When everything is up and running, you should see the finished part 1 lab.
 
 ![completed](./media/finished.png)
 
 
+
+with some changes...
+
+## 2. `+page.js`
+
+This script is loaded before **`+page.svelte`**. It main purpose here is to fill the store before the page is displayed. This is to ensure that the latest database data is displayed,
+
+![page.js](./media/page.js.png)
+
+
+
+## 2. `+page.svelte`
+
+This is where you will find the main changes.
+
+
+
+#### 2.1 Use of **`$: filtered`**
+
+In order to store a filtered version of the products list from the store, `$: filtered` is declared in the `<script>` block. It is set equal to `$products`. The **`$:`** syntax is used to 'subscribe' `filtered` to `$products` so that it is kept updated.  
+
+![](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filtered.png)
+
+
+
+`filtered` is then used in place of `$product` further down in the table.
+
+![filtered_for_each](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filtered_for_each.png)
+
+
+
+#### 2.2 filter by category id
+
+The result will be the same as before - only display products for the selected category, but this time the filtering is carried out on the **product store** and does not require an API call.
+
+The function stats with `$products`, which contains the full list and then uses the JavaScript array filter method to return only products with a matching `category_id`. The filtered list is assigned to `filtered` which causes the displayed product list to update.
+
+ ![filterByCat](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filterByCat.png)
+
+
+
+**`filterByCat()`** is called whenever a category link is clicked (as before):
+
+![filter_by_cat_click](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filter_by_cat_click.png)
+
+
+
+## Exercises
+
+1. Add filters to the product table headers so that the table is sorted  (ascending or descending order alphabetically or numerically)  when they are clicked.![sort_filters](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\sort_filters.png)
+
+
+
+These links may help:
+
+https://javascript.info/array-methods#filter
+
+https://javascript.info/array-methods#sort-fn
+
+2. Use **svelte-simple-datatables** to display products
+
+   -  https://github.com/vincjo/svelte-simple-datatables
+
+   **Note**, this component must run in browser, use an if block ( https://svelte.dev/tutorial/else-if-blocks) around your datatable to check if running in browser,
+
+   ```html
+   <script>
+     import { browser } from '$app/environment';
+   </script>
+   
+   <html>
+       {#if browser}
+       	<!-- only runs in browser and will not be server rendered -->
+       	<table>
+           <!-- rows etc. -->    
+       	</table>
+       {/if}
+   </html>
+   ```
+
+   
 
 ------
 

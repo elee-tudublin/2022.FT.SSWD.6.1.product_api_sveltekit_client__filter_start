@@ -6,6 +6,7 @@
   // initially filtered is a copy of products (from the store)
   $: filtered = $products;
 
+
   // This function will filter products by cat_id
   const filterByCat = async (cat_id = 0) => {
 
@@ -75,3 +76,9 @@
         </div> <!-- End Product col -->
       </div> <!-- End Row -->
     </div> <!-- End Main Content-->
+
+    <style>
+        #products {
+            min-height: 30em;
+        }
+    </style>

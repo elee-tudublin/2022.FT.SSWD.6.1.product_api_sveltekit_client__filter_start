@@ -2,6 +2,7 @@
 import  {getAllProducts, getAllCategories} from '../stores/productStore.js';
 
 // Refresh the store when page loads (optional due to overhead but probably a good idea)
+// @ts-ignore
 export const load = async ({ fetch }) => {
 
     // fill the store
@@ -9,6 +10,5 @@ export const load = async ({ fetch }) => {
     await getAllCategories();
 
     return {
-
     }
 }
