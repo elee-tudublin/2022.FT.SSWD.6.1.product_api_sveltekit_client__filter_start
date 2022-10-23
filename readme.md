@@ -81,34 +81,55 @@ The function stats with `$products`, which contains the full list and then uses 
 
 
 
-These links may help:
+- These links may help:
+  - https://javascript.info/array-methods#filter
 
-https://javascript.info/array-methods#filter
+  - https://javascript.info/array-methods#sort-fn
 
-https://javascript.info/array-methods#sort-fn
 
-2. Use **svelte-simple-datatables** to display products
+2. Add a search feature which accepts search words via a text input.
 
-   -  https://github.com/vincjo/svelte-simple-datatables
+   - Use the search words to filter product_name and/ or product_description
 
-   **Note**, this component must run in browser, use an if block ( https://svelte.dev/tutorial/else-if-blocks) around your datatable to check if running in browser,
+   - See: https://svelte.dev/tutorial/text-inputs
 
-   ```html
-   <script>
-     import { browser } from '$app/environment';
-   </script>
-   
-   <html>
-       {#if browser}
-       	<!-- only runs in browser and will not be server rendered -->
-       	<table>
-           <!-- rows etc. -->    
-       	</table>
-       {/if}
-   </html>
-   ```
+   - This code may help - try it in your browser console
 
-   
+     ```javascript
+         // array
+         const arr = ['The', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog'];
+     
+         // search for array elements which include 'o'
+         let search_result = arr.filter((str) => {return str.includes('o');});
+     
+         console.log(search_result);
+     ```
+
+     
+
+3. Use **svelte-simple-datatables** to display products
+
+-  add a new page based on the existing product page (`routes/+page.js` and `routes/+page.svelte`). Use `/datatables` as the route and add a link to the nav menu.
+-  https://github.com/vincjo/svelte-simple-datatables
+
+**Note**, this component must run in browser, use an if block ( https://svelte.dev/tutorial/else-if-blocks) around your datatable to check if running in browser,
+
+```html
+<script>
+  import { browser } from '$app/environment';
+</script>
+
+<html>
+    {#if browser}
+    	<!-- only runs in browser and will not be server rendered -->
+    	<table>
+        <!-- rows etc. -->    
+    	</table>
+    {/if}
+</html>
+```
+
+
 
 ------
 
