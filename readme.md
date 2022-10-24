@@ -5,6 +5,7 @@ Enda Lee 2022
 ### Quick Start
 
 1. Make sure the `Server API` app is running on http://localhost:5001
+- See https://github.com/elee-tudublin/2022.FT.SSWD.5.4.product_api_sveltekit_client_complete
 2. Download the start site from this repository.
 3. Open in VS Code (separate to the server API instance).
 4. In a terminal run `npm install`.
@@ -49,13 +50,13 @@ This is where you will find the main changes.
 
 In order to store a filtered version of the products list from the store, `$: filtered` is declared in the `<script>` block. It is set equal to `$products`. The **`$:`** syntax is used to 'subscribe' `filtered` to `$products` so that it is kept updated.  
 
-![](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filtered.png)
+![]./media/filtered.png)
 
 
 
 `filtered` is then used in place of `$product` further down in the table.
 
-![filtered_for_each](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filtered_for_each.png)
+![filtered_for_each](./media/filtered_for_each.png)
 
 
 
@@ -65,19 +66,19 @@ The result will be the same as before - only display products for the selected c
 
 The function stats with `$products`, which contains the full list and then uses the JavaScript array filter method to return only products with a matching `category_id`. The filtered list is assigned to `filtered` which causes the displayed product list to update.
 
- ![filterByCat](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filterByCat.png)
+ ![filterByCat](./media/filterByCat.png)
 
 
 
 **`filterByCat()`** is called whenever a category link is clicked (as before):
 
-![filter_by_cat_click](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\filter_by_cat_click.png)
+![filter_by_cat_click](./media/filter_by_cat_click.png)
 
 
 
 ## Exercises
 
-1. Add filters to the product table headers so that the table is sorted  (ascending or descending order alphabetically or numerically)  when they are clicked.![sort_filters](D:\webapps\_SSWD_2022\Labs_ft\svelte_client\2022.FT.SSWD.6.1.product_api_sveltekit_client_start_filter\media\sort_filters.png)
+1. Add filters to the product table headers so that the table is sorted  (ascending or descending order alphabetically or numerically)  when they are clicked.![sort_filters](./media/sort_filters.png)
 
 
 
@@ -92,6 +93,7 @@ The function stats with `$products`, which contains the full list and then uses 
    - Use the search words to filter product_name and/ or product_description
 
    - See: https://svelte.dev/tutorial/text-inputs
+   - Svelte Dom event handling: https://svelte.dev/tutorial/dom-events
 
    - This code example will help - try it in your browser console
 
