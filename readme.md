@@ -131,6 +131,9 @@ The function stats with `$products`, which contains the full list and then uses 
 </html>
 ```
 
+4. Add a search product endpoint to the server API so that searches can be made via: http://localhost:5001/product/searchtitle/:keyword
+
+The JavaScript filter/ includes example from Ex2 can also be used server-side or you can use Prisma full text search, see: https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
 
 
 ------
