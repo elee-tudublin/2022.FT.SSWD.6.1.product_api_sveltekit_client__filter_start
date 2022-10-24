@@ -133,7 +133,9 @@ The function stats with `$products`, which contains the full list and then uses 
 
 ##### 4. Add a search product endpoint to the server API.
 
-Searches can be made via: http://localhost:5001/product/searchtitle/:keyword
+Searches should be made via: http://localhost:5001/product/searchtitle/:keyword
+
+The result should be a list of products with names or descriptions which include the keyword.
 
 The JavaScript filter/ includes example from Ex2 can also be used server-side or you can use Prisma full text search, see: https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
 
