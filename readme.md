@@ -78,7 +78,7 @@ The function stats with `$products`, which contains the full list and then uses 
 
 ## Exercises
 
-1. Add filters to the product table headers so that the table is sorted  (ascending or descending order alphabetically or numerically)  when they are clicked.![sort_filters](./media/sort_filters.png)
+##### 1. Add filters to the product table headers so that the table is sorted  (ascending or descending order alphabetically or numerically)  when they are clicked.![sort_filters](./media/sort_filters.png)
 
 
 
@@ -88,7 +88,7 @@ The function stats with `$products`, which contains the full list and then uses 
   - https://javascript.info/array-methods#sort-fn
 
 
-2. Add a search feature which accepts search words via a text input.
+##### 2. Add a search feature which accepts search words via a text input.
 
    - Use the search words to filter product_name and/ or product_description
 
@@ -109,7 +109,7 @@ The function stats with `$products`, which contains the full list and then uses 
 
      
 
-3. Use **svelte-simple-datatables** to display products
+##### 3. Use **svelte-simple-datatables** to display products
 
 -  add a new page based on the existing product page (`routes/+page.js` and `routes/+page.svelte`). Use `/datatables` as the route and add a link to the nav menu.
 -  https://github.com/vincjo/svelte-simple-datatables
@@ -131,7 +131,9 @@ The function stats with `$products`, which contains the full list and then uses 
 </html>
 ```
 
-4. Add a search product endpoint to the server API so that searches can be made via: http://localhost:5001/product/searchtitle/:keyword
+##### 4. Add a search product endpoint to the server API.
+
+Searches can be made via: http://localhost:5001/product/searchtitle/:keyword
 
 The JavaScript filter/ includes example from Ex2 can also be used server-side or you can use Prisma full text search, see: https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
 
