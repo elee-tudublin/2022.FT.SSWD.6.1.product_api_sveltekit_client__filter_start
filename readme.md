@@ -133,7 +133,7 @@ The function stats with `$products`, which contains the full list and then uses 
 
 ##### 4. Add a search product endpoint to the server API.
 
-Searches should be made via: http://localhost:5001/product/searchtitle/:keyword
+Searches should be made via: http://localhost:5001/product/search/:keyword
 
 The result should be a list of products with names or descriptions which include the keyword.
 
